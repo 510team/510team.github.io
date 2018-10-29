@@ -1,0 +1,24 @@
+{
+    "name": "510team.github.io",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "directories": {
+        "doc": "docs"
+    },
+    "scripts": {
+        "dev": "vuepress dev docs",
+        "docs:build": "vuepress build docs",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/510team/510team.github.io.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/510team/510team.github.io/issues"
+    },
+    "homepage": "https://github.com/510team/510team.github.io#readme"
+}
