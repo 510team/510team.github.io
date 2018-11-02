@@ -206,7 +206,7 @@ renderMixin(Vue);
 export default Vue;
 ```
 
-到这里，终于看到了 Vue 的定义，因此也就找到了 Vue 的根源。Vue 就是一个构造函数。
+到这里，终于看到了 Vue 的定义，因此也就找到了 Vue 的根源。Vue 就是一个构造函数。接下来就分析一下 Vue 的初始化。
 
 ## 总结
 
