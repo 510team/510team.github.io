@@ -1,15 +1,15 @@
 # Flow
 
-## WHAT
+## What
 
 [Flow](https://flow.org/en/)是 js 的静态类型检查器。它可以让你的代码更快、更聪明。由于 VUE 中大量使用了 flow，故我们先来了解一下 flow，以便帮助我们学习 VUE 源码。
 
-## WHY
+## Why
 
 Javascript 作为一种弱类型的脚本语言，虽然我们在定义的时候不用关心变量的类型，增加了易用性，也变的比较简单，但是往往在使用的时候会因为赋值或者传值的类型的错误，而造成预期之外的结果，
 增加了我们检查代码的工作量，从而有了 Flow 的产生。有了类型检查器，即方便我们自己的调用，也方便其他人阅读自己的代码，增加了代码的可读性以及团队协作性。
 
-## HOW
+## How
 
 接下来我们就学习一下如何使用 Flow。由于我们是在学习 VUE 源码的时候学习 Flow 的，因此本章节只讲解使如何在自己的现有项目中使用 Flow 以及 Flow 的基本用法。
 
@@ -117,10 +117,10 @@ method(); // 正确!
 
 ```js
 const method = (value?: string) => {};
-method("bar"); // Works!
-method(undefined); // Works!
-method(null); // Error!
-method(); // Works!
+method("bar"); // 正确!
+method(undefined); // 正确!
+method(null); // 错误!
+method(); // 正确!
 ```
 
 #### 混合类型 mixed
@@ -165,8 +165,8 @@ class Bar {
         return "[Bar]";
     }
 }
-const foo: Serializable = new Foo(); // Works!
-const bar: Serializable = new Bar(); // error!
+const foo: Serializable = new Foo(); // 正确!
+const bar: Serializable = new Bar(); // 错误!
 ```
 
 Flow 的使用方法呢，总体来讲就是提前定义一下变量的类型，以便以后使用的时候做判断。如果想要知道 Flow 中的各个类型具体是怎么检测的呢，请移步[Flow 官网](https://flow.org/en/docs/types)
