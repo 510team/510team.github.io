@@ -23,6 +23,11 @@ module.exports = {
                     ["/foreword/flow", "Flow"],
                     ["/foreword/rollup", "Rollup"]
                 ]
+            },
+            {
+                title: "Vue",
+                collapsable: false,
+                children: [["/vue/", "介绍"], ["/vue/entry", "查找入口文件"]]
             }
         ]
     },
