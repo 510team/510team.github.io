@@ -17,7 +17,7 @@ module.exports = {
         sidebar: [
             {
                 title: "前情提要",
-                collapsable: false,
+                collapsable: true,
                 children: [
                     ["/foreword/", "介绍"],
                     ["/foreword/flow", "Flow"],
@@ -26,8 +26,12 @@ module.exports = {
             },
             {
                 title: "Vue",
-                collapsable: false,
-                children: [["/vue/", "介绍"], ["/vue/entry", "查找入口文件"]]
+                collapsable: true,
+                children: [
+                    ["/vue/", "介绍"],
+                    ["/vue/entry", "查找入口文件"],
+                    ["/vue/init", "初始化"]
+                ]
             }
         ]
     },
