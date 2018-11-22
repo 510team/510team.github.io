@@ -13,3 +13,4 @@ runtime/
 .DS_Store
 .vscode
 docs/.vuepress/dist
+lib/app/.temp/*
