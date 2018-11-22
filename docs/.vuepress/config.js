@@ -18,39 +18,25 @@ module.exports = {
     sidebar: [
       {
         title: "前情提要",
-        collapsable: false,
+        collapsable: true,
         children: [
           ["/foreword/", "介绍"],
           ["/foreword/flow", "Flow"],
           ["/foreword/rollup", "Rollup"]
         ]
-    ],
-    themeConfig: {
-        displayAllHeaders: true, // 默认值：false
-        nav: [{ text: "首页", link: "/" }],
-        sidebar: [
-            {
-                title: "前情提要",
-                collapsable: true,
-                children: [
-                    ["/foreword/", "介绍"],
-                    ["/foreword/flow", "Flow"],
-                    ["/foreword/rollup", "Rollup"]
-                ]
-            },
-            {
-                title: "Vue",
-                collapsable: true,
-                children: [
-                    ["/vue/", "介绍"],
-                    ["/vue/entry", "查找入口文件"],
-                    ["/vue/init", "初始化"]
-                ]
-            }
+      },
+      {
+        title: "Vue",
+        collapsable: true,
+        children: [
+          ["/vue/", "介绍"],
+          ["/vue/entry", "查找入口文件"],
+          ["/vue/init", "初始化"]
         ]
       }
     ]
   },
+
   markdown: {
     lineNumbers: true
   }

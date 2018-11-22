@@ -9,7 +9,6 @@ node_modules/
 output/
 output.tar.gz
 runtime/
-app/
 */ .DS_Store
 .DS_Store
 .vscode
