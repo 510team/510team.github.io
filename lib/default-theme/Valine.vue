@@ -1,11 +1,17 @@
 <template>
-    <div v-if="1">
-        <div class="valine" id="vcomments"></div>
-    </div>
+  <div v-if="1" class="valine-wrapper">
+
+    <div class="valine" id="vcomments"></div>
+    <!-- <pay></pay> -->
+  </div>
 </template>
 
 <script>
+import Pay from './pay'
 export default {
+  components:{
+    Pay
+  },
   name: 'Valine',
   computed: {
     data () {
@@ -41,8 +47,12 @@ export default {
 }
 </script>
 <style>
+.valine-wrapper {
+  /* display: flex;
+  justify-content: space-around; */
+}
 .valine {
-  max-width: 740px;
+  width: 740px;
   margin: 0 auto;
   padding: 2rem 2.5rem;
 }

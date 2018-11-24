@@ -14,8 +14,19 @@ module.exports = {
 
   themeConfig: {
     displayAllHeaders: true, // 默认值：false
-    nav: [{ text: "首页", link: "/" }],
+    nav: [
+      { text: "首页", link: "/" },
+      {
+        text: "GitHub",
+        link: "https://github.com/510team"
+      }
+    ],
     sidebar: [
+      {
+        title: "捐赠",
+        collapsable: false,
+        children: [["/pay/", "喝杯咖啡"]]
+      },
       {
         title: "前情提要",
         collapsable: false,
@@ -31,7 +42,8 @@ module.exports = {
         children: [
           ["/vue/", "介绍"],
           ["/vue/entry", "查找入口文件"],
-          ["/vue/init", "初始化"]
+          ["/vue/init", "初始化"],
+          ["/vue/observer", "数据观测"]
         ]
       }
     ]

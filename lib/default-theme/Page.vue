@@ -36,16 +36,18 @@
 
     <slot name="bottom" />
     <valine></valine>
+    <pay></pay>
   </div>
 </template>
 
 <script>
 import { resolvePage, normalize, outboundRE, endingSlashRE } from './util'
 import Valine from './Valine.vue'
+import Pay from './pay.vue'
 
 export default {
   props: ['sidebarItems'],
-  components: { Valine },
+  components: { Valine,Pay },
   computed: {
     lastUpdated () {
       if (this.$page.lastUpdated) {
