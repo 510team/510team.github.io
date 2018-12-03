@@ -45,6 +45,13 @@ module.exports = {
           ["/vue/init", "初始化"],
           ["/vue/observer", "数据观测"]
         ]
+      },
+      {
+        title: "番外篇",
+        collapsable: false,
+        children: [
+          ["/wxShare/", "微信分享"]
+        ]
       }
     ]
   },
