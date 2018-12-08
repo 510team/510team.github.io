@@ -50,7 +50,8 @@ module.exports = {
         title: "番外篇",
         collapsable: false,
         children: [
-          ["/wxShare/", "微信分享"]
+          ["/wxShare/", "微信分享"],
+          ["/wxShare/optimize", "部分优化"]
         ]
       }
     ]
