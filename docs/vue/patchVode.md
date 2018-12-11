@@ -45,10 +45,10 @@ if (
 
 4、如果 vnode 节点没有 text 文本时：
 
--   4.1
+-   4.1 （_详见：updataChildren_）
 
 ```js
-/**如果 oldNode,vnode 结点均有 children 子节点，则对子节点进行 diff 操作，调用 updateChildren 更新子节点 （_详见：updataChildren_）
+/**如果 oldNode,vnode 结点均有 children 子节点，则对子节点进行 diff 操作，调用 updateChildren 更新子节点
  **/
 updateChildren(elm, oldCh, ch, insertedVnodeQueue, removeOnly);
 ```
