@@ -1,10 +1,13 @@
+---
+prev: ./patch
+next: ./updateChildren
+---
+
 # diff 算法 + patch （2）
 
 ## What
 
 patchVode：当 vnode 和 oldVnode 都存在、oldVnode 不是真实节点，并且 vnode 和 oldVnode 是同一节点时，才会调用 patchVnode 进行 patch
-
-UpdataChildren : 更新子节点
 
 ## How
 
@@ -45,7 +48,7 @@ if (
 
 4、如果 vnode 节点没有 text 文本时：
 
--   4.1 （_详见：updataChildren_）
+-   4.1 （_详见：[updateChildren](/vue/updateChildren.html)_）
 
 ```js
 /**如果 oldNode,vnode 结点均有 children 子节点，则对子节点进行 diff 操作，调用 updateChildren 更新子节点

@@ -1,3 +1,8 @@
+---
+prev: ./patchVnode
+next: false
+---
+
 # diff 算法 + patch （3）
 
 ## What
@@ -210,4 +215,6 @@ else if (newStartIdx > newEndIdx) {
 
 <br/>
 
-> 图片来源于：https://github.com/aooy/blog/issues/2
+> <font color=gray size=3> 图片来源于：[https://github.com/aooy/blog/issues/2](https://github.com/aooy/blog/issues/2)</font>
+
+## <br/>

@@ -55,6 +55,18 @@ module.exports = {
                     ["/wxShare/optimize", "部分优化"]
                 ]
             }
+        ],
+        pages: [
+            {
+                path: "/vue/patchVnode",
+                title: "patchVnode",
+                frontmatter: {}
+            },
+            {
+                path: "/vue/updateChildren",
+                title: "UpdateChildren",
+                frontmatter: {}
+            }
         ]
     },
 

@@ -1,3 +1,8 @@
+---
+prev: false
+next: ./patchVnode
+---
+
 # diff 算法 + patch （1）
 
 ## What
@@ -60,7 +65,7 @@ var Vnode = {
 
     3、当 vnode 和 oldVnode 都存在时：
 
-    -   3.1 (_详见：patchVode_)
+    -   3.1 (_详见：[patchVnode](/vue/patchVnode.html)_)
 
     ```js
     /**当 oldVnode 不是真实节点，并且 vnode 和 oldVnode 是同一节点时，则调用 patchVnode 进行 patch，即直接修改现有的节点
