@@ -3,36 +3,42 @@ prev: ./patchVnode
 next: false
 ---
 
-# diff 算法 + patch （3）
+# diff 算法 与 patch -3
 
 ## What
 
-UpdataChildren : 更新子节点
+UpdateChildren : 更新子节点
 
 ## How
-
-1、oldCh 和 newCh 各有两个头尾的变量 StartIdx 和 EndIdx，它们的 2 个变量相互比较，一共有 4 种比较方式。
-
-2、如果 4 种比较都没匹配，就会用 key 进行比较：拿 newStartVnode 的 key 值在 oldCh 中遍历，如果有相同的 key 值的节点并且 2 个节点是相同节点，则移动 Dom 节点，否则创建新元素。。
-
-3、在比较的过程中，变量会往中间靠，一旦 StartIdx>EndIdx 表明 oldCh 和 newCh 至少有一个已经遍历完了，就会结束比较。
-<br/>
-
-#### 上代码：
 
 ```js
 /**
  *  oldCh:oldVNode chirdren
  *  newCh:newVNode chirdren
+ *  StartIdx   开头索引
+ *  EndIdx     结束索引
+ *  vnode中的key，可以作为节点的标识
  * **/
+```
+
+1、oldCh 和 newCh 各有两个头尾的变量 StartIdx 和 EndIdx，它们的 2 个变量相互比较，一共有 4 种比较方式。
+
+2、如果 4 种比较都没匹配，就会用 key 进行比较：拿 newStartVnode 的 key 值在 oldCh 中遍历，如果存在相同 key 的节点并且 与 newStartVnode 是相同节点，则移动 Dom 节点，否则创建新元素。。
+
+3、在比较的过程中，变量会往中间靠，一旦 StartIdx>EndIdx 表明 oldCh 和 newCh 至少有一个已经遍历完了，就会结束比较。
+<br/>
+
+#### 具体流程，上代码：
+
+```js
 let oldStartIdx = 0;
 let newStartIdx = 0;
 let oldEndIdx = oldCh.length - 1;
 let oldStartVnode = oldCh[0];
-let oldEndVnode = oldCh[oldEndIdx]; //oldCh当前索引的指向
+let oldEndVnode = oldCh[oldEndIdx];
 let newEndIdx = newCh.length - 1;
 let newStartVnode = newCh[0];
-let newEndVnode = newCh[newEndIdx]; //newCh当前索引的指向
+let newEndVnode = newCh[newEndIdx];
 let oldKeyToIdx, idxInOld, vnodeToMove, refElm;
 ```
 
@@ -46,8 +52,7 @@ let oldKeyToIdx, idxInOld, vnodeToMove, refElm;
 1.1、
 
 ```js
-/**
- * **/
+//2种情况，只移动索引
 if (isUndef(oldStartVnode)) {
     oldStartVnode = oldCh[++oldStartIdx]; // Vnode has been moved left
 } else if (isUndef(oldEndVnode)) {
@@ -58,8 +63,7 @@ if (isUndef(oldStartVnode)) {
 1.2、oldCh 和 newCh 各自的两个头尾的变量 StartIdx 和 EndIdx，它们每 2 个变量相互比较，一共有以下 4 种比较方式，索引不断向中间靠拢
 
 ```js
-/**
-**/
+
 else if (sameVnode(oldStartVnode, newStartVnode)) {
     //不需要对dom进行移动
     patchVnode(oldStartVnode, newStartVnode, insertedVnodeQueue);
@@ -75,7 +79,8 @@ else if (sameVnode(oldStartVnode, newStartVnode)) {
 
 ```js
 else if (sameVnode(oldStartVnode, newEndVnode)) {
-    //当oldStartVnode，newEndVnode是相同节点，说明oldStartVnode.el跑到oldEndVnode.el的后边了。
+    /**当oldStartVnode，newEndVnode是相同节点，说明oldStartVnode.el跑到oldEndVnode.el的后边了。
+     **/
     patchVnode(oldStartVnode, newEndVnode, insertedVnodeQueue);
     canMove &&
         nodeOps.insertBefore(
@@ -94,7 +99,8 @@ else if (sameVnode(oldStartVnode, newEndVnode)) {
 
 ```js
 else if (sameVnode(oldEndVnode, newStartVnode)) {
-    // 当oldEndVnode，newStartVnode是相同节点，说明 oldEndVnode.el跑到了oldStartVnode.el的前边。
+    /** 当oldEndVnode，newStartVnode是相同节点，说明 oldEndVnode.el跑到了oldStartVnode.el的前边。
+     **/
     patchVnode(oldEndVnode, newStartVnode, insertedVnodeQueue);
     canMove &&
         nodeOps.insertBefore(
@@ -120,12 +126,13 @@ if (isUndef(oldKeyToIdx))
      * createKeyToOldIdx生成一个key与oldVnode的索引对应的map,只有第一次进来undefined的时候会生成
      **/
     oldKeyToIdx = createKeyToOldIdx(oldCh, oldStartIdx, oldEndIdx);
-/*如果newStartVnode存在key, 返回这个key在oldVnode中的索引值（即第几个节点，下标），否则调用findIdxInOld方法查找key在oldVnode中的索引值*/
+/**如果newStartVnode存在key, 返回这个key在oldVnode中的索引值（即第几个节点，下标），否则调用findIdxInOld方法查找key在oldVnode中的索引值
+ **/
 idxInOld = isDef(newStartVnode.key)
     ? oldKeyToIdx[newStartVnode.key]
     : findIdxInOld(newStartVnode, oldCh, oldStartIdx, oldEndIdx);
 if (isUndef(idxInOld)) {
-    /*newStartVnode没有key或者是该key没有在老节点中找到，则创建一个新的节点*/
+    //newStartVnode没有key或者是该key没有在老节点中找到，则创建一个新的节点
     createElm(
         newStartVnode,
         insertedVnodeQueue,
@@ -136,7 +143,7 @@ if (isUndef(idxInOld)) {
         newStartIdx
     );
 } else {
-    /*获取相同key的老节点*/
+    /**获取相同key的老节点**/
     vnodeToMove = oldCh[idxInOld];
     if (sameVnode(vnodeToMove, newStartVnode)) {
         //相同key值的vnodeToMove 与 newStartVnode 是同一个节点，将vnodeToMove.elm 插入到oldStartVnode.elm前面
@@ -217,4 +224,8 @@ else if (newStartIdx > newEndIdx) {
 
 > <font color=gray size=3> 图片来源于：[https://github.com/aooy/blog/issues/2](https://github.com/aooy/blog/issues/2)</font>
 
-## <br/>
+<br/>
+
+::: tip 注释
+[查看 vue 相关源码](https://github.com/510team/vue-resource-analysis/blob/master/src/core/vdom/patch.js)
+:::

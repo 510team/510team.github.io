@@ -3,18 +3,19 @@ prev: ./patch
 next: ./updateChildren
 ---
 
-# diff 算法 + patch （2）
+# diff 算法 与 patch -2
 
 ## What
 
-patchVode：当 vnode 和 oldVnode 都存在、oldVnode 不是真实节点，并且 vnode 和 oldVnode 是同一节点时，才会调用 patchVnode 进行 patch
+patchVode：当 vnode 和 oldVnode 都存在、oldVnode 不是真实节点，并且 vnode 和 oldVnode 值得比较时，才会调用 patchVnode 进行 patch
 
 ## How
 
 1、
 
 ```js
-//如果 oldVnode 和 vnode 完全一致，则可认为没有变化，return；
+/**如果 oldVnode 和 vnode 完全一致，则可认为没有变化，return；
+ **/
 if (oldVnode === vnode) {
     return;
 }
@@ -24,9 +25,9 @@ if (oldVnode === vnode) {
 
 ```js
 /**
-vnode.elm  表示当前虚拟节点对应的真实dom节点的引用
-vnode,oldVnode指向同一个真实 DOM 的引用
-**/
+ * vnode.elm  表示当前虚拟节点对应的真实dom节点的引用
+ * vnode,oldVnode指向同一个真实 DOM 的引用
+ **/
 const elm = (vnode.elm = oldVnode.elm);
 ```
 
@@ -48,7 +49,7 @@ if (
 
 4、如果 vnode 节点没有 text 文本时：
 
--   4.1 （_详见：[updateChildren](/vue/updateChildren.html)_）
+-   4.1 （_详见 diff 核心：[updateChildren](/vue/updateChildren.html)_）
 
 ```js
 /**如果 oldNode,vnode 结点均有 children 子节点，则对子节点进行 diff 操作，调用 updateChildren 更新子节点
@@ -67,7 +68,8 @@ addVnodes(elm, null, ch, 0, ch.length - 1, insertedVnodeQueue);
 -   4.3
 
 ```js
-/**如果只有 oldVnode 节点有子节点的时候，则移除所有 elm 的子节点**/
+/**如果只有 oldVnode 节点有子节点的时候，则移除所有 elm 的子节点
+ **/
 removeVnodes(elm, oldCh, 0, oldCh.length - 1);
 ```
 
@@ -78,3 +80,9 @@ removeVnodes(elm, oldCh, 0, oldCh.length - 1);
  **/
 nodeOps.setTextContent(elm, vnode.text);
 ```
+
+<br/>
+
+::: tip 注释
+[查看 vue 相关源码](https://github.com/510team/vue-resource-analysis/blob/master/src/core/vdom/patch.js)
+:::
