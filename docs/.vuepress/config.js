@@ -48,6 +48,14 @@ module.exports = {
                 ]
             },
             {
+                title: "Vuex",
+                collapsable: false,
+                children: [
+                    ["/vuex/", "vuex介绍"],
+                    ["/vuex/source", "vuex源码分析"]
+                ]
+            },
+            {
                 title: "番外篇",
                 collapsable: false,
                 children: [
