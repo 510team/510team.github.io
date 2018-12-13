@@ -3,7 +3,7 @@ prev: ./patch
 next: ./updateChildren
 ---
 
-# diff 算法 与 patch -2
+# diff 算法 与 patch （第二部分）
 
 ## What
 

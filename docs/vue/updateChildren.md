@@ -3,7 +3,7 @@ prev: ./patchVnode
 next: false
 ---
 
-# diff 算法 与 patch -3
+# diff 算法 与 patch （第三部分）
 
 ## What
 
