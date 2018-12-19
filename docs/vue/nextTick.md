@@ -70,6 +70,43 @@ Vue.nextTick(function() {
 });
 ```
 
+需要注意 UI 并不一定执行。参见如下代码
+
+```
+<template>
+  <div class="hello">
+    {{ msg }}
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'HelloWorld',
+  data() {
+    return {
+        msg: 'One'
+    }
+  },
+  mounted() {
+      this.msg = 'Two';
+
+      this.$nextTick(() => {
+          this.msg = 'Three';
+      });
+
+      /*
+        setTimeout(() => {
+          this.msg = 'Three';
+       }, 0);
+      */
+
+  }
+}
+</script>
+```
+
+上述例子 在使用 nextTick 的时候，我们在页面看不到 message 是 Two 的情况。而将 nextTick 换到 setTimeout 的时候，我们就会看到了 UI 从 Two 变成了 Three。有兴趣的同学可以执行下看看。[参考 StackOver 的一个回答](https://stackoverflow.com/questions/47634258/what-is-nexttick-or-what-does-it-do-in-vuejs)
+
 为了不那么频繁的更新 Dom，Vue 做了一个异步任务就是 nextTick 中执行了渲染了 Dom，什么时候最快的执行异步操作呢？setTimeout，setimmediate，或者是 Promise.then,MutationObsever，根据之前的理解，我们可以想到我们只要优先选择 microtask，如果当前浏览器不支持，则降级为 macrotask。这也就是 NextTick 的核心原理。
 
 ```javascript
