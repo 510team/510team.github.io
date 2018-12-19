@@ -1,13 +1,45 @@
 # Vue 的 NextTick
 
-## 粗看 Event loop
+## 初看 Event loop
 
-对于初学者来说 只需要理解 Javascript 是单线程的。运行环境中包含一个队列和执行栈。代码中同步任务都在执行栈中执行，遇到一些需要异步操作比如 setTimeout 或者 ajax 请求。运行环境底层会开启线程来执行，执行完成后将回调函数放到异步队列里 。队列里放的都是异步任务的回调函数。在执行栈中没有任务执行的时候，则会从队列中取一个任务（回调函数），放到当前执行栈中来执行。如此反复 就是 Event Loop。
+对于初学者来说 只需要理解 Javascript 是单线程的。运行环境中包含一个队列和执行栈。代码中同步任务都在执行栈中执行，遇到一些需要异步操作比如 setTimeout 或者 ajax 请求。运行环境底层会开启线程来执行，执行完成后将回调函数放到异步队列里 。队列里放的都是异步任务的回调函数。在执行栈中没有任务执行的时候，则会从队列中取一个任务（回调函数），放到当前执行栈中来执行。如此反复 就是 Event Loop。那么来看看下面一段代码的执行结果。
+
+```javascript
+console.log("script start");
+
+setTimeout(function() {
+  console.log("setTimeout");
+}, 0);
+
+Promise.resolve()
+  .then(function() {
+    console.log("promise1");
+  })
+  .then(function() {
+    console.log("promise2");
+  });
+
+console.log("script end");
+```
+
+执行结果是
+
+```javascript
+script start
+script end
+promise1
+promise2
+setTimeout
+```
+
+如果不明白为什么，那么你需要深入理解 event loop 了。
 
 ## 细看 Event Loop
 
 ![vuedata](../.vuepress/public/eventloop.png)
 实际上在整个循环中有两个任务队列，分别叫做 macrotasks（宏任务，经常也叫 tasks） 和 microtasks（微任务）. 在每次 loop 的时候，需要从队列中选一个头部的等待时间最长的的宏任务来执行，在执行完宏任务，然后查看如果微任务队列，如果微任务队列中有任务，则不断循环将微任务队列里的任务全都执行完。然后再判断浏览器是否要执行 UI 渲染。具体的 event loop 过程可以  参照[HTML5 whatwg 规范](https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model).
+
+需要注意的是执行 JavaScript Code 也是一个 macrotask. 可以参考一个代码的执行例子来理解。[Task,Macrotask](https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/)
 
 ### UI 渲染
 
