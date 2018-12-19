@@ -532,7 +532,10 @@ dispatch 和 commit 的原理相同。如果有多个同名 action，会等到�
   }
 ```
 
-至此，整个 installModule 里涉及到的内容已经分析完毕。我们在 options 中传进来的 action 和 mutation 已经在 store 中。但是 state 和 getters 还没有。这就是接下来的 resetStoreVM 方法做的事情。
+至此，整个 installModule 里涉及到的内容已经分析完毕。这时的store树结构如下：
+![vuex-5](../.vuepress/public/vuex-5.png)
+
+我们在 options 中传进来的 action 和 mutation 已经在 store 中。但是 state 和 getters 还没有。这就是接下来的 resetStoreVM 方法做的事情。
 
 ## resetStoreVM
 
@@ -618,7 +621,7 @@ function enableStrictMode(store) {
 
 让我们来看一看执行完 resetStoreVM 后的 store 结构。现在的 store 中已经有了 getters 属性，并且 getters 和 state 都是响应式的。
 
-![vuex-5](../.vuepress/public/vuex-5.png)
+![vuex-6](../.vuepress/public/vuex-6.png)
 
 至此 vuex 的核心代码初始化部分已经分析完毕。源码里还包括一些插件的注册及暴露出来的 API 像 mapState mapGetters mapActions mapMutation 等函数就不在这里介绍了，感兴趣的可以自行去源码里看看，比较好理解。这里就不做过多介绍。
 
