@@ -62,6 +62,11 @@ module.exports = {
                     ["/wxShare/", "微信分享"],
                     ["/wxShare/optimize", "部分优化"]
                 ]
+            },
+            {
+                title: "每周新闻",
+                collapsable: false,
+                children: [["/weeklyReport/", "2018-12-17"]]
             }
         ],
         pages: [
