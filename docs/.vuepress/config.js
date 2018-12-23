@@ -56,6 +56,16 @@ module.exports = {
                 ]
             },
             {
+                title: "Vue Router",
+                collapsable: false,
+                children: [
+                    ["/vue-router/", "vue router介绍"],
+                    ["/vue-router/install", "vue router注册"],
+                    ["/vue-router/instantiate", "vue router实例化"],
+                    ["/vue-router/render", "组件渲染"]
+                ]
+            },
+            {
                 title: "番外篇",
                 collapsable: false,
                 children: [
