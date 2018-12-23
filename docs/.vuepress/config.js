@@ -44,7 +44,8 @@ module.exports = {
                     ["/vue/entry", "查找入口文件"],
                     ["/vue/init", "初始化"],
                     ["/vue/observer", "数据观测"],
-                    ["/vue/patch", "diff算法与patch"]
+                    ["/vue/patch", "diff算法与patch"],
+                    ["/vue/nextTick", "eventLoop和nextTick实现"]
                 ]
             },
             {
@@ -72,6 +73,11 @@ module.exports = {
                     ["/wxShare/", "微信分享"],
                     ["/wxShare/optimize", "部分优化"]
                 ]
+            },
+            {
+                title: "每周新闻",
+                collapsable: false,
+                children: [["/weeklyReport/", "2018-12-17"]]
             }
         ],
         pages: [
