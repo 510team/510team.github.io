@@ -77,7 +77,7 @@ module.exports = {
             {
                 title: "每周新闻",
                 collapsable: false,
-                children: [["/weeklyReport/", "2018-12-17"]]
+                children: [["/weeklyReport/", "新闻"]]
             }
         ],
         pages: [

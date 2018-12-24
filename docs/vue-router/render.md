@@ -140,3 +140,20 @@ const component = (cache[name] = matched.components[name]);
 `parent._routerRoot` 表示的是根 Vue 实例，那么这个循环就是从当前的 `<router-view>` 的父节点向上找，一直找到根 Vue 实例，在这个过程，如果碰到了父节点也是 `<router-view>`的时候，说明 `<router-view>` 有嵌套的情况，`depth++`。遍历完成后，根据当前线路匹配的路径和 `depth` 找到对应的 `RouteRecord`，进而找到该渲染的组件。
 render 函数的最后根据 component 渲染出对应的组件 vonde：
 `return h(component, data, children)`
+
+# 总结
+
+1. 安装插件
+   混入 beforeCreate 生命周期处理，初始化\_routerRoot，\_router，\_route 等数据
+   全局设置 vue 静态访问 router 和 router 和 route，方便后期访问
+   完成了 router-link 和 router-view 两个组件的注册，router-link 用于触发路由的变化，router-view 作 为功能组件，用于触发对应路由视图的变化
+2. 根据路由配置生成 router 实例
+   根据配置数组生成路由配置记录表
+   生成监控路由变化的 hsitory 对象
+3. 将 router 实例传入根 vue 实例
+   根据 beforeCreate 混入，为根 vue 对象设置了劫持字段\_route，用户触发 router-view 的变化
+   调用 init()函数，完成首次路由的渲染，首次渲染的调用路径是 调用 history.transitionTo 方法，根据 router 的 match 函数，生成一个新的 route 对象
+   接着通过 confirmTransition 对比一下新生成的 route 和当前的 route 对象是否改变，改变的话触发 updateRoute，更新 hsitory.current 属性，触发根组件的\_route 的变化,从而导致组件的调用 render 函数，更新 router-view
+   另外一种更新路由的方式是主动触发
+   router-link 绑定了 click 方法，触发 history.push 或者 history.replace,从而触发 history.transitionTo
+   同时会监控 hashchange 和 popstate 来对路由变化作对用的处理
